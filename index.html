@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>匹克球教练成长计划 · 第一阶段</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+:root {
+  --bg: #F6F4EF;
+  --card: #FFFFFF;
+  --text: #18181B;
+  --muted: #6B6860;
+  --hint: #A1A09A;
+  --border: #E5E3DC;
+  --accent: #2355D4;
+  --accent-light: #EEF2FC;
+  --accent-mid: #9BB0EC;
+  --warn: #B45309;
+  --warn-bg: #FFFBEB;
+  --warn-border: #FCD34D;
+  --green: #15803D;
+  --green-bg: #F0FDF4;
+  --green-border: #86EFAC;
+  --red: #DC2626;
+  --red-bg: #FEF2F2;
+  --red-border: #FECACA;
+  --coral: #C2410C;
+  --coral-bg: #FFF7ED;
+  --r: 12px;
+  --rs: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+/* NAV */
+.topbar {
+  background: var(--text);
+  color: #fff;
+  padding: 0 28px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 200;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.topbar-dot { width: 8px; height: 8px; border-radius: 50%; background: #60A5FA; }
+.topbar-name { font-size: 14px; font-weight: 500; letter-spacing: 0.2px; }
+.topbar-badge {
+  font-size: 11px; background: rgba(255,255,255,0.15);
+  padding: 3px 10px; border-radius: 99px; letter-spacing: 0.3px;
+}
+
+/* HERO */
+.hero {
+  background: var(--text);
+  color: #fff;
+  padding: 52px 28px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.hero-label {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: #93C5FD; font-weight: 500; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-label::before { content: ''; display: block; width: 24px; height: 1px; background: #93C5FD; }
+.hero h1 {
+  font-size: 40px; font-weight: 900; line-height: 1.15;
+  letter-spacing: -1px; margin-bottom: 16px;
+}
+.hero h1 em { color: #93C5FD; font-style: normal; }
+.hero-desc {
+  font-size: 16px; color: rgba(255,255,255,0.65);
+  max-width: 520px; line-height: 1.8; margin-bottom: 32px;
+}
+.hero-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-chip {
+  font-size: 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 14px; border-radius: 99px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* PROGRESS */
+.progress-wrap {
+  background: var(--card); border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  position: sticky; top: 52px; z-index: 100;
+}
+.progress-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+.progress-track {
+  flex: 1; height: 6px; background: var(--bg);
+  border-radius: 99px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 99px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+.progress-label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+/* CONTENT */
+.content { max-width: 720px; margin: 0 auto; padding: 0 28px 100px; }
+
+/* CHAPTER DIVIDERS */
+.chapter {
+  display: flex; align-items: center; gap: 14px;
+  margin: 52px 0 20px;
+}
+.chapter-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.chapter-info {}
+.chapter-title { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+.chapter-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+.card-h { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.card-p { font-size: 14px; color: var(--muted); line-height: 1.85; }
+
+/* COMPARE TABLE */
+.compare {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); overflow: hidden; margin-bottom: 14px;
+}
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.compare-col { padding: 18px 20px; }
+.compare-col:first-child { border-right: 1px solid var(--border); }
+.compare-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.compare-label.bad { color: var(--red); }
+.compare-label.good { color: var(--green); }
+.compare-item {
+  font-size: 14px; color: var(--text);
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  line-height: 1.6;
+}
+.compare-item:last-child { border-bottom: none; }
+.compare-footer {
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  font-size: 13px; color: var(--muted);
+  background: var(--bg);
+}
+
+/* FORMULA */
+.formula-box {
+  background: var(--accent); border-radius: var(--r);
+  padding: 24px 28px; margin-bottom: 14px; color: #fff;
+  text-align: center;
+}
+.formula-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+.formula-eq { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; }
+.formula-note { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 8px; }
+
+/* SCORE CARDS */
+.score-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.score-card {
+  border-radius: var(--r); padding: 18px 20px;
+  border: 1px solid;
+}
+.score-card.bad { background: var(--red-bg); border-color: var(--red-border); }
+.score-card.good { background: var(--green-bg); border-color: var(--green-border); }
+.score-tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 8px; }
+.score-eq { font-size: 14px; color: var(--text); margin-bottom: 6px; }
+.score-result { font-size: 28px; font-weight: 900; }
+.score-card.bad .score-result { color: var(--red); }
+.score-card.good .score-result { color: var(--green); }
+
+/* STEPS */
+.steps { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 14px; }
+.steps-header { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 700; background: var(--bg); }
+.step-row {
+  display: flex; gap: 16px; padding: 16px 20px;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.step-row:last-child { border-bottom: none; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent-light); color: var(--accent);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+/* SCENARIO */
+.scenario { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 14px; }
+.scenario-head {
+  background: var(--bg); padding: 12px 18px;
+  font-size: 13px; font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.s-tag {
+  font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 4px; letter-spacing: 0.3px; text-transform: uppercase;
+}
+.s-tag-s { background: var(--accent-light); color: var(--accent); }
+.dialog-row {
+  display: flex; gap: 14px; padding: 14px 18px;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+  background: var(--card);
+}
+.dialog-row:last-child { border-bottom: none; }
+.dm {
+  font-size: 10px; font-weight: 800; padding: 3px 8px;
+  border-radius: 4px; flex-shrink: 0; margin-top: 3px;
+  letter-spacing: 0.3px;
+}
+.dm-bad { background: var(--red-bg); color: var(--red); }
+.dm-good { background: var(--green-bg); color: var(--green); }
+.dt { font-size: 14px; line-height: 1.75; }
+.dn {
+  margin-top: 8px; padding: 8px 12px;
+  background: var(--bg); border-radius: var(--rs);
+  font-size: 12px; color: var(--muted); line-height: 1.6;
+}
+
+/* CALLOUT BOXES */
+.callout {
+  border-radius: var(--r); padding: 16px 20px;
+  margin-bottom: 14px; display: flex; gap: 12px; align-items: flex-start;
+  font-size: 14px; line-height: 1.8;
+}
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout.warn { background: var(--warn-bg); border: 1px solid var(--warn-border); color: #78350F; }
+.callout.info { background: var(--accent-light); border: 1px solid var(--accent-mid); color: #1E3A8A; }
+.callout.red { background: var(--red-bg); border: 1px solid var(--red-border); color: #991B1B; }
+.callout.green { background: var(--green-bg); border: 1px solid var(--green-border); color: #14532D; }
+
+/* HIGHLIGHT RULE */
+.rule-box {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-light);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 14px 18px; margin-bottom: 14px;
+  font-size: 16px; font-weight: 700; color: var(--accent);
+}
+
+/* FORBID LIST */
+.forbid-grid {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 18px 20px; margin-bottom: 14px;
+}
+.forbid-tag {
+  font-size: 13px; padding: 4px 12px;
+  background: var(--red-bg); color: var(--red);
+  border: 1px solid var(--red-border);
+  border-radius: var(--rs); font-weight: 500;
+}
+.forbid-note { width: 100%; font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+
+/* WHY COUNT */
+.why-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+.why-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 18px 16px; text-align: center; }
+.why-num { font-size: 30px; font-weight: 900; margin-bottom: 6px; }
+.why-card:nth-child(1) .why-num { color: var(--hint); }
+.why-card:nth-child(2) .why-num { color: var(--warn); }
+.why-card:nth-child(3) .why-num { color: var(--accent); }
+.why-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* CHECKLIST */
+.checklist { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 14px; }
+.cl-header { background: var(--bg); padding: 13px 18px; font-size: 13px; font-weight: 700; border-bottom: 1px solid var(--border); }
+.cl-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 13px 18px; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: background 0.12s;
+}
+.cl-item:last-child { border-bottom: none; }
+.cl-item:hover { background: var(--bg); }
+.cl-box {
+  width: 20px; height: 20px; border-radius: 5px;
+  border: 2px solid var(--border); flex-shrink: 0;
+  margin-top: 2px; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.cl-item.done .cl-box { background: var(--green); border-color: var(--green); }
+.cl-item.done .cl-box::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 800; }
+.cl-item.done .cl-text { text-decoration: line-through; color: var(--hint); }
+.cl-text { font-size: 14px; line-height: 1.65; }
+
+/* TABLE */
+.tbl { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 14px; font-size: 14px; }
+.tbl th { background: var(--bg); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+.tbl td { padding: 12px 14px; border-bottom: 1px solid var(--border); line-height: 1.65; vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--bg); }
+
+/* PILL */
+.pill {
+  display: inline-block; font-size: 11px;
+  padding: 2px 9px; border-radius: 99px; font-weight: 600;
+}
+.pill-blue { background: var(--accent-light); color: var(--accent); }
+.pill-green { background: var(--green-bg); color: var(--green); }
+.pill-warn { background: var(--warn-bg); color: var(--warn); }
+
+/* MINDSET BLOCK */
+.mindset {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r); overflow: hidden; margin-bottom: 14px;
+}
+.mindset-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.mindset-col { padding: 18px 20px; }
+.mindset-col:first-child { border-right: 1px solid var(--border); background: var(--red-bg); }
+.mindset-col:last-child { background: var(--green-bg); }
+.mindset-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+.mindset-col:first-child .mindset-tag { color: var(--red); }
+.mindset-col:last-child .mindset-tag { color: var(--green); }
+.mindset-text { font-size: 14px; line-height: 1.8; }
+
+/* DIVIDER */
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+/* SUB SECTION */
+.sub-section { margin: 28px 0 14px; }
+.sub-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.sub-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+.sub-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+
+/* EXAMPLE VOICE */
+.voice-block {
+  background: var(--card); border-radius: var(--r);
+  border: 1px solid var(--border); overflow: hidden; margin-bottom: 10px;
+}
+.voice-row { padding: 13px 18px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+.voice-row:last-child { border-bottom: none; }
+.voice-who { font-size: 11px; font-weight: 700; color: var(--muted); flex-shrink: 0; min-width: 32px; margin-top: 2px; }
+.voice-say { font-size: 14px; line-height: 1.7; }
+
+/* FOOTER */
+.footer { max-width: 720px; margin: 0 auto; padding: 24px 28px; font-size: 12px; color: var(--hint); display: flex; justify-content: space-between; border-top: 1px solid var(--border); }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 28px; }
+  .score-row { grid-template-columns: 1fr; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  .mindset-row { grid-template-columns: 1fr; }
+  .mindset-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  .why-row { grid-template-columns: 1fr; }
+  .content { padding: 0 16px 80px; }
+  .hero { padding: 36px 20px 36px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-dot"></div>
+    <div class="topbar-name">匹克球教练成长计划</div>
+  </div>
+  <div class="topbar-badge">第一阶段 · 职业化认知与基础服务</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Phase One</div>
+    <h1>从"会打球的人"<br>变成<em>受欢迎的教练</em></h1>
+    <p class="hero-desc">你现在能上课、能带孩子，技术底子已经到位了。这个阶段要解决的，是另一件事——让学员和家长真正认可你、愿意选择你。</p>
+    <div class="hero-chips">
+      <div class="hero-chip">职业教练认知</div>
+      <div class="hero-chip">场馆接待服务</div>
+      <div class="hero-chip">成人学员话术</div>
+      <div class="hero-chip">三明治反馈结构</div>
+      <div class="hero-chip">情绪价值与信任建立</div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <span class="progress-label">学习进度</span>
+    <div class="progress-track"><div class="progress-fill" id="pbar"></div></div>
+    <span class="progress-label" id="ptxt">0 / 16 完成</span>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ==============================
+     CHAPTER 1: 认知重建
+============================== -->
+<div class="chapter">
+  <div class="chapter-num">1</div>
+  <div class="chapter-info">
+    <div class="chapter-title">重新理解你的工作</div>
+    <div class="chapter-sub">最重要的一章 · 所有东西从这里开始</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-h">你现在怎么理解自己的工作？</div>
+  <div class="card-p">
+    大多数新教练进入这行，心里的答案都差不多：<strong>把球教好就行了</strong>。这个想法没有错，但它只说对了一半。<br><br>
+    如果只靠技术留住学员，那么只要你附近开了一家技术更好的场馆，你的学员就会走。但事实是，很多教练技术一般，学员续费率反而很高；也有技术很扎实的教练，学员总是流失。<br><br>
+    差别不在技术——在于<strong>学员感受到了什么</strong>。
+  </div>
+</div>
+
+<div class="compare">
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-label bad">❌ 教练以为学员在看</div>
+      <div class="compare-item">技术水平高不高</div>
+      <div class="compare-item">课程内容专不专业</div>
+      <div class="compare-item">有没有拿过证书</div>
+      <div class="compare-item">纠错准不准</div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-label good">✅ 学员真正用来续费的理由</div>
+      <div class="compare-item">孩子/我喜不喜欢这个教练</div>
+      <div class="compare-item">来这里舒不舒服、有没有被重视</div>
+      <div class="compare-item">教练有没有主动反馈进展</div>
+      <div class="compare-item">每次来都有"在进步"的感觉</div>
+    </div>
+  </div>
+  <div class="compare-footer">
+    家长看不懂技术好不好，但她能感受到你打招呼了没有、下课后有没有跟她说孩子今天学了什么。
+    这些才是真正影响她下次续费的东西。
+  </div>
+</div>
+
+<div class="formula-box">
+  <div class="formula-label">记住这个公式，它决定了你在学员眼中的实际价值</div>
+  <div class="formula-eq">教练价值 = 教学能力 × 服务能力</div>
+  <div class="formula-note">两者相乘，不是相加 —— 其中一项是零，结果就是零</div>
+</div>
+
+<div class="score-row">
+  <div class="score-card bad">
+    <div class="score-tag">常见情况</div>
+    <div class="score-eq">教学 90分 × 服务 40分</div>
+    <div class="score-result">≈ 60分体验</div>
+  </div>
+  <div class="score-card good">
+    <div class="score-tag">目标状态</div>
+    <div class="score-eq">教学 80分 × 服务 90分</div>
+    <div class="score-result">≈ 95分体验</div>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">🔍</div>
+  <div>
+    <strong>问问自己：</strong>上周你带了几节课？在这几节课里，有几次是你主动开口跟学员或家长说话的（不是他们问你）？
+    这个数字，就是你目前服务意识水平的真实反映。
+  </div>
+</div>
+
+<div class="sub-section">
+  <div class="sub-title">教练的两种思维模式</div>
+</div>
+
+<div class="mindset">
+  <div class="mindset-row">
+    <div class="mindset-col">
+      <div class="mindset-tag">❌ 打工思维</div>
+      <div class="mindset-text">
+        我来上课，把球技教了，时间到了，我走。<br><br>
+        学员不问我，我不说。<br>
+        出了场地的事，不关我的事。<br>
+        家长满不满意，是场馆的问题。
+      </div>
+    </div>
+    <div class="mindset-col">
+      <div class="mindset-tag">✅ 职业教练思维</div>
+      <div class="mindset-text">
+        我负责的是这个学员的整体体验，不只是课上那一小时。<br><br>
+        学员有没有想续费，有一部分是我决定的。<br>
+        家长信不信任这里，也有一部分是我影响的。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-h">一个孩子续费，到底是因为什么？</div>
+  <div class="card-p">
+    不是因为技术进步了——技术进步家长可能都看不出来。<br><br>
+    续费是因为家长心里有这些感觉：<br><br>
+    ▸ <strong>孩子愿意来</strong>，甚至主动问"今天去打球吗"<br>
+    ▸ <strong>教练记得我孩子</strong>，知道他上次练了什么<br>
+    ▸ <strong>每次下课都有反馈</strong>，让我觉得钱没白花<br>
+    ▸ <strong>在这里感觉被尊重</strong>，不是随便糊弄过去的<br><br>
+    这四件事，哪一件不是你能控制的？
+  </div>
+</div>
+
+<div class="checklist">
+  <div class="cl-header">✦ 本章自我反思（读完打钩）</div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">我能用自己的话解释"教练价值公式"，而不是背出来</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">我知道自己目前更接近哪种思维模式，以及具体差在哪里</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">这周主动开口和学员/家长说话，不等他们先问（至少做到3次）</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==============================
+     CHAPTER 2: 接待服务
+============================== -->
+<div class="chapter">
+  <div class="chapter-num">2</div>
+  <div class="chapter-info">
+    <div class="chapter-title">场馆接待与服务动线</div>
+    <div class="chapter-sub">学员进门到离场的每一步，都是印象分</div>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">📌</div>
+  <div>
+    <strong>为什么从这里开始练：</strong>学员对一个教练的第一印象，是在进门那10秒钟形成的——比你教学技术的展示来得早得多。一次好的接待，能让他对你的信任提前建立；一次冷淡的接待，哪怕课上教得再好，也要花好几节课才能弥补。
+  </div>
+</div>
+
+<div class="steps">
+  <div class="steps-header">▸ 标准接待五步流程 · 每次都要走完</div>
+  <div class="step-row">
+    <div class="step-num">1</div>
+    <div>
+      <div class="step-title">看到人进来，立刻起身或转身</div>
+      <div class="step-desc">不要等对方走到你面前，不要低头看手机。眼神接触 + 身体转向，就是"我看到你了"最简单的表达。就算正在忙，点个头也行。</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">2</div>
+    <div>
+      <div class="step-title">叫出名字 + 问一句状态</div>
+      <div class="step-desc">
+        老客户："小李来了！今天状态怎么样？"<br>
+        新客户："你好！第一次来吗？我带你转一圈，顺便说说这里怎么玩～"<br>
+        <span style="font-size:13px;color:var(--red);">特别说明：叫出名字这件事，比你想象的重要10倍。被人记住名字，是最基本的"被重视"信号。</span>
+      </div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">3</div>
+    <div>
+      <div class="step-title">课中留意场外等候区</div>
+      <div class="step-desc">家长在旁边等的时候，偶尔路过时点个头说"快好了啊"，或者让孩子去喝个水时顺嘴跟家长说一句今天练什么。这30秒，会被家长记住很久。</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">4</div>
+    <div>
+      <div class="step-title">课后30秒总结</div>
+      <div class="step-desc">
+        固定结构三句话：<strong>今天练了什么 → 哪里有进步 → 下次目标</strong><br>
+        例："今天重点练了反手击球。你击球点的位置比上节课稳多了，这是很大的进步。下节课我们加一点步法配合，会更好。"
+      </div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">5</div>
+    <div>
+      <div class="step-title">自然植入下次预约</div>
+      <div class="step-desc">"下节课你想继续巩固反手，还是加点战术进去？我帮你留好时间。" 不是硬推销——是在帮他规划，顺带完成预约。</div>
+    </div>
+  </div>
+</div>
+
+<div class="sub-section">
+  <div class="sub-title">关于"叫名字"这件事</div>
+  <div class="sub-desc">这是一个值得单独讲的细节</div>
+</div>
+
+<div class="card">
+  <div class="card-h">为什么记住名字这么重要？</div>
+  <div class="card-p">
+    心理学上有一个结论：人类大脑对自己名字的反应，和对其他任何词语都不一样——听到自己名字时，大脑的激活程度等同于受到了个人关注。<br><br>
+    对学员来说，教练叫出他的名字，传递的信号是："我是被这个教练记住的，我在这里是有存在感的。"<br><br>
+    <strong>怎么做到记住名字：</strong><br>
+    ▸ 第一次见面后，当天晚上把名字写下来，写上一个记忆点（比如"陈伟 / 戴黑色帽子 / 打过羽毛球"）<br>
+    ▸ 下次见面前，提前回忆一下，进门时就叫出来<br>
+    ▸ 实在记不住，直接承认然后再问一遍——比叫错强100倍
+  </div>
+</div>
+
+<div class="sub-section">
+  <div class="sub-title">场景模拟：接待</div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 01</span>
+    一对夫妻走进场馆，东张西望，没人主动招待
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      坐在那继续做自己的事，等他们走过来问你。
+      <div class="dn">❌ 对方的感受：这里的人不热情，我进来了好像没人理我。这种感觉会延伸成对整个场馆的第一印象。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      主动起身走过去："你好！第一次来吗？我带你们转一下场地，顺便说说我们这里怎么玩～"
+      <div class="dn">✅ 主动走过去 + 友好语气 + 给出引导，对方立刻感受到"这里有人在管，有人欢迎我"。</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 02</span>
+    家长等候区，一个妈妈一个人坐在那边玩手机
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      完全不理她，专注上课。
+      <div class="dn">❌ 家长感觉自己是透明的。下次续费时，她内心会有一个微弱的感觉："这里不太在乎我"。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      课间让孩子去喝水时，走过去说一句："今天小明状态挺好的，一直很投入。" 或者就是点个头笑一下。
+      <div class="dn">✅ 30秒的事，但家长会记住"这个教练有把我当存在"。这就是服务感的来源。</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 03</span>
+    课结束，学员拿起水杯准备走
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      "好，今天到这，下次见。"
+      <div class="dn">❌ 没有总结，没有期待感，也没有任何预约暗示。学员走出去之后对今天这节课什么印象都没有。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      "今天反手击球点你往前调了，有几次打得很稳，进步很明显！下节课我们在这个基础上加一点移动步法，这样遇到大角度球也能接到——你下次是周三还是周六方便？"
+      <div class="dn">✅ 具体进步（让他知道今天没白来）+ 下次期待感（让他觉得还有东西要学）+ 自然预约（不是硬推销）。</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 04</span>
+    学员问："上次你说的那个步法，我回去练了但感觉还是不对"
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      "嗯，你来的时候我再看看吧。"
+      <div class="dn">❌ 这句话等于什么都没说，学员感受不到你在认真对待他的问题。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      "你能模仿一下给我看吗？就站在这里做个动作。" 然后立刻给出具体反馈。哪怕场外也可以，花3分钟解答。
+      <div class="dn">✅ 你主动找问题根源，而不是敷衍了事——这是"负责任"最直接的表现。</div>
+    </div>
+  </div>
+</div>
+
+<div class="checklist">
+  <div class="cl-header">✦ 接待服务打卡</div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">连续5次做到"学员进门，我先开口"，不等他们来找我</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">每节课后做完"三句话课后总结"（今天练了什么 / 哪里有进步 / 下次目标）</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">学员名字记住至少5位，能在进门时主动叫出来</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">至少1次成功用"植入预约"话术，让学员当场确定了下次时间</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==============================
+     CHAPTER 3: 情绪价值与成人话术
+============================== -->
+<div class="chapter">
+  <div class="chapter-num">3</div>
+  <div class="chapter-info">
+    <div class="chapter-title">情绪价值与成人话术</div>
+    <div class="chapter-sub">为什么成人不选你——根源在这里</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-h">成人学员真正在买什么</div>
+  <div class="card-p">
+    你可能觉得，成人学员来上课就是想学技术。没错，技术是理由——但不是唯一的理由，甚至不是最重要的。<br><br>
+    成人买课，同时买了三样东西：<br><br>
+    <strong>① 技术提升</strong>——表面需求，他嘴上说的<br>
+    <strong>② 社交体验</strong>——在这里认识朋友、融入一个圈子的感觉<br>
+    <strong>③ 情绪价值</strong>——感觉自己被重视、在进步、有成就感<br><br>
+    如果你只给了①，但②③都没有，成人就会说"跟这个教练上课感觉不太舒服"——他自己也说不清楚哪里不舒服，但这个感觉是真实的。
+  </div>
+</div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <strong>成人和孩子最大的不同：</strong>孩子在乎好不好玩，成人在乎面子。
+    成人在一个陌生技能上打飞球、出丑，内心是有压力的。教练如果没有意识到这一点，随便说一句"你怎么又打飞了"，
+    可能那个学员下节课就不来了。
+  </div>
+</div>
+
+<div class="sub-section">
+  <div class="sub-title">三明治反馈结构</div>
+  <div class="sub-desc">所有纠错话术的核心框架，适用于成人和儿童</div>
+</div>
+
+<div class="rule-box">先肯定 → 再纠错 → 给方法 + 重试机会</div>
+
+<div class="card">
+  <div class="card-h">为什么要先肯定？</div>
+  <div class="card-p">
+    人在接受批评之前，大脑有一个自我保护机制——如果感受到评判，会先进入防御状态，这时候你说的任何话都很难进去。<br><br>
+    先给一个真实的肯定（不是假的称赞），让对方的防御机制放松下来，之后的纠错才能被听进去。<br><br>
+    <strong>注意：肯定要具体，不能空洞。</strong><br>
+    ▸ 空洞的肯定："你打得不错。"（成人知道这是敷衍）<br>
+    ▸ 具体的肯定："你今天在跑位上比上节课主动多了，这个进步很难得。"（对方知道你在认真看他）
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 05</span>
+    成人学员反手连续打飞，开始有点沮丧
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      "你重心太高了，挥拍方向也不对，击球点还靠后，你要蹲下去才行。"
+      <div class="dn">❌ 一次性说了四个问题。成人会感觉"我好像什么都是错的"，沮丧感加剧，甚至开始怀疑自己不适合这项运动。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      "你今天发力比上节课稳多了，球飞出去的速度明显有了。就一个地方——手腕这里，往下扣一点点。来，我演示一下。"（示范）"好，你再试一个。"
+      <div class="dn">✅ 先肯定真实的进步 → 只说一个改进点（不要同时说多个）→ 立刻给机会补救，不让他带着挫败感结束这次练习。</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 06</span>
+    成人打了一个非常好的球
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      "好球！"
+      <div class="dn">❌ 没有意义的空洞表扬。成人听了就听了，不会产生任何成就感，因为他不知道自己哪里好。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      "这个球好在哪你知道吗？你提前看到了对方的移动方向，脚步已经到位了才击球——这才是正确的节奏，很多人打了一年都还没做到。"
+      <div class="dn">✅ 具体说出好在哪里，成人的成就感是实实在在落地的。他下课会记得这句话，回家可能会跟家人讲。</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 07</span>
+    成人同一个动作纠正了三次还是没改过来
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      "这个我说了三遍了，你要注意听……"
+      <div class="dn">❌ 成人会感到被责怪，自尊心受损，开始觉得"这个教练嫌弃我"。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      "这个动作很多人练好几个月才能形成习惯，是肌肉记忆的问题，不是理解的问题。我们换个方式——你先把重心这一步单独拆出来，不用管球，就这个动作反复做20次，身体会记住的。"
+      <div class="dn">✅ 把"他不会"变成"这是个正常的学习规律"，帮他保住面子，同时给出新方法，让他看到出路。</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 08</span>
+    成人第一次来咨询，问"你们课程怎么样"
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      直接介绍课程内容、节数和价格。
+      <div class="dn">❌ 对方还没有感受到被理解，你就开始介绍产品，感觉像被推销。成人对这种感觉非常敏感。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      先聊三分钟，问他："之前有没有接触过匹克球？主要是健身还是喜欢社交？平时有打羽毛球或网球的习惯吗？"<br>
+      听完之后再说："那你这个情况，我建议……因为……"
+      <div class="dn">✅ 先了解他的需求，再给方案。对方感受到的是"这个教练在帮我"，而不是"在卖给我"。这两种感受，续费率差别很大。</div>
+    </div>
+  </div>
+</div>
+
+<div class="sub-section">
+  <div class="sub-title">禁止使用的话</div>
+  <div class="sub-desc">以下几句话，说出去可能当时没事，但会在学员心里埋下离开的种子</div>
+</div>
+
+<div class="forbid-grid">
+  <div class="forbid-tag">不对</div>
+  <div class="forbid-tag">你怎么总是打错</div>
+  <div class="forbid-tag">你看别人</div>
+  <div class="forbid-tag">这么简单还不会</div>
+  <div class="forbid-tag">说了多少遍了</div>
+  <div class="forbid-tag">你没认真听</div>
+  <div class="forbid-tag">你没认真练</div>
+  <div class="forbid-note">
+    这些话有一个共同点：<strong>把责任推给学员，让他产生羞耻感</strong>。哪怕他真的没认真，你也不能这样说——
+    你的目标是让他下节课还想来，而不是让他当场承认错误。
+    遇到这些情况，永远先找方法，不要找责任。
+  </div>
+</div>
+
+<div class="sub-section">
+  <div class="sub-title">成人来上课的第一节课，你应该问什么</div>
+</div>
+
+<div class="card">
+  <div class="card-h">了解需求的5个问题</div>
+  <div class="card-p">
+    成人第一次来，在开始教学之前，先用这几个问题建立连接。不用全问，挑合适的问：
+  </div>
+  <div style="margin-top: 14px;">
+    <table class="tbl" style="margin: 0;">
+      <thead>
+        <tr><th>问题</th><th>你在了解什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>"之前有接触过匹克球吗，还是完全零基础？"</td><td>判断教学起点和方式</td></tr>
+        <tr><td>"主要是想健身，还是喜欢这个运动的社交感？"</td><td>了解核心动机，后续话术用得上</td></tr>
+        <tr><td>"有打过羽毛球、网球或乒乓球吗？"</td><td>判断他已有的运动基础，调整难度</td></tr>
+        <tr><td>"希望大概多久能打到可以跟朋友一起玩的水平？"</td><td>了解时间预期，帮你设置节奏</td></tr>
+        <tr><td>"有没有特别想学的东西，或者特别困扰你的问题？"</td><td>找到他的痛点，让他感受到你在认真对待他</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="checklist">
+  <div class="cl-header">✦ 成人话术打卡</div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">成人课上纠错时，每次先给肯定再纠错（连续做到10次）</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">表扬学员时，说出具体原因，而不只是"好球"或"不错"（至少5次）</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">这周一次都没有说禁用语（"不对"、"你总是"、"你看别人"等）</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">新来的成人学员，我用了"了解需求"的方式开场，而不是直接开始教</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==============================
+     CHAPTER 4: 反馈与记录习惯
+============================== -->
+<div class="chapter">
+  <div class="chapter-num">4</div>
+  <div class="chapter-info">
+    <div class="chapter-title">学员记录与跟进习惯</div>
+    <div class="chapter-sub">让学员感觉"我被这个教练认真对待了"</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-h">为什么要记录？</div>
+  <div class="card-p">
+    你每天可能带五六节课，十几二十个学员。但对每个学员来说，他只有你这一个教练。他上次说的话、上次练的内容、他提过的顾虑——他是希望你记得的。<br><br>
+    如果下次他来，你完全不记得上次发生了什么，从头问"你上次练了什么"，他心里会觉得"我对这个教练来说不重要"。<br><br>
+    <strong>记录不需要复杂，关键是要有。</strong>
+  </div>
+</div>
+
+<div class="steps">
+  <div class="steps-header">▸ 每个学员下课后，花2分钟记这几件事</div>
+  <div class="step-row">
+    <div class="step-num">①</div>
+    <div>
+      <div class="step-title">今天练了什么，重点在哪</div>
+      <div class="step-desc">一句话就够。"今天主要练反手，击球点偏后，在调整。"</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">②</div>
+    <div>
+      <div class="step-title">有没有明显的进步或卡住的地方</div>
+      <div class="step-desc">"步法开始主动了，但重心转换还不稳定。" 这个信息下次见面可以直接用。</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">③</div>
+    <div>
+      <div class="step-title">他说过的任何个人信息</div>
+      <div class="step-desc">"他说下周有出差，可能来不了。" "他的膝盖不太好，要注意跑动量。" 这些细节，下次用到时会让他非常惊喜。</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">④</div>
+    <div>
+      <div class="step-title">下次准备练什么</div>
+      <div class="step-desc">提前想好方向，下次见面不用临时想，显得有规划感。</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-head">
+    <span class="s-tag s-tag-s">情境 09</span>
+    学员隔了两周才来，你不记得他上次练了什么
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-bad">错误</div>
+    <div class="dt">
+      "哦……你上次练了什么来着？"（眼神飘走，开始想）
+      <div class="dn">❌ 学员心里很清楚"教练不记得我了"。他对这节课的期待值立刻降低。</div>
+    </div>
+  </div>
+  <div class="dialog-row">
+    <div class="dm dm-good">正确</div>
+    <div class="dt">
+      他来之前你已经翻了一下记录，进门后："两周没来，上次我们正练到反手步法那里，今天继续——你自己有没有感觉哪里还不熟？"
+      <div class="dn">✅ 对方感受到"教练记得我在哪里，他有在关注我的进展"。这是信任建立最快的方式之一。</div>
+    </div>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">💡</div>
+  <div>
+    <strong>简单工具建议：</strong>手机备忘录每个学员建一个，或者微信收藏里给每个学员单独记一条。不需要专门的app，重要的是养成习惯。下课后花2分钟，比你之后花10分钟想"那个谁上次说了什么"要高效得多。
+  </div>
+</div>
+
+<div class="checklist">
+  <div class="cl-header">✦ 记录习惯打卡</div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">给目前所有学员建了记录（哪怕是最简单的备忘录格式）</div>
+  </div>
+  <div class="cl-item" onclick="tick(this)">
+    <div class="cl-box"></div>
+    <div class="cl-text">连续一周，每节课下课后2分钟内更新学员记录</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==============================
+     CHAPTER 5: 为什么持续练比一次性讲重要
+============================== -->
+<div class="chapter">
+  <div class="chapter-num">5</div>
+  <div class="chapter-info">
+    <div class="chapter-title">为什么持续练比一次性学重要</div>
+    <div class="chapter-sub">关于这份培训的正确打开方式</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-h">话术不是知识点，是肌肉记忆</div>
+  <div class="card-p">
+    这份材料你今天读完，觉得"都明白了"——这很正常，因为内容不难理解。<br><br>
+    但"明白了"和"用得出来"之间，差了一百次练习。<br><br>
+    想一个具体的场景：家长结束课程后突然问你，"我孩子学这么久了，感觉没什么进步，你觉得他适不适合继续学？"<br><br>
+    你有<strong>3秒钟</strong>来回答这个问题，用正确的语气、说出对的内容、给她一个留下来的理由。<br><br>
+    在这3秒钟里，你没有时间想"我在培训材料里学过怎么回答这类问题"——大脑反应不过来的。
+    只有练得足够多，遇到这种情况时，正确的话才会自然地出来。
+  </div>
+</div>
+
+<div class="why-row">
+  <div class="why-card">
+    <div class="why-num">读1次</div>
+    <div class="why-desc">懂了<br>但过两天就忘</div>
+  </div>
+  <div class="why-card">
+    <div class="why-num">练10次</div>
+    <div class="why-desc">想起来能用<br>但需要思考</div>
+  </div>
+  <div class="why-card">
+    <div class="why-num">练100次</div>
+    <div class="why-desc">自然反应<br>压力下也对</div>
+  </div>
+</div>
+
+<div class="callout green">
+  <div class="callout-icon">✅</div>
+  <div>
+    <strong>正确的用法：</strong>把这份材料当作参考手册，不是背诵稿。每次遇到一个新场景，先自己想怎么说，再翻回来对照。
+    每周找人做一次角色扮演——让别人扮演家长或学员，你来应对。哪里卡了，就把那个地方多练几遍。
+    三个月后回头看，你会发现自己处理事情的速度和质量，和现在完全不是一个水平。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-h">这个阶段结束的标志是什么</div>
+  <div class="card-p">
+    不是"我读完了这份材料"。<br>
+    不是"我知道三明治反馈是什么意思了"。<br><br>
+    而是：<br><br>
+    ▸ <strong>不用想</strong>，学员进门我就开口打招呼了<br>
+    ▸ <strong>不用想</strong>，下课后三句话总结自然就说出来了<br>
+    ▸ <strong>不用想</strong>，纠错时先肯定，已经成了本能<br>
+    ▸ 遇到家长问犀利问题，能沉住气，有应对思路<br><br>
+    做到这四点，第一阶段结束。
+  </div>
+</div>
+
+<div class="callout warn">
+  <div class="callout-icon">🎯</div>
+  <div>
+    <strong>你现在可以做的第一件事：</strong>
+    今天就去找一个你信任的人，让他扮演刚走进场馆的新客户，你来接待。
+    不用等"准备好了"，直接做——做完之后你立刻就知道自己哪里还不够流畅。
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<div class="footer">
+  <span>第一阶段 · 职业化认知与基础服务</span>
+  <span>下一阶段 · 家长沟通与儿童心理</span>
+</div>
+
+<script>
+const TOTAL = 16;
+function updateProgress() {
+  const done = document.querySelectorAll('.cl-item.done').length;
+  document.getElementById('ptxt').textContent = done + ' / ' + TOTAL + ' 完成';
+  document.getElementById('pbar').style.width = Math.round((done / TOTAL) * 100) + '%';
+}
+function tick(el) {
+  el.classList.toggle('done');
+  updateProgress();
+}
+updateProgress();
+</script>
+</body>
+</html>
